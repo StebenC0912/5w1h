@@ -20,9 +20,10 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentMainBinding.inflate(inflater, container, false)
-        viewPager = binding.viewPager2
+        val binding = FragmentMainBinding.inflate(inflater)
         myViewPageAdapter = MyViewPageAdapter(this)
+        viewPager = binding.viewPager2
+
         viewPager.adapter = myViewPageAdapter
         bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener {item ->
