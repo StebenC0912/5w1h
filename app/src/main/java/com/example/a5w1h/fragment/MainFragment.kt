@@ -22,9 +22,9 @@ class MainFragment : Fragment() {
     ): View {
         val binding = FragmentMainBinding.inflate(inflater, container, false)
         viewPager = binding.viewPager2
-        bottomNavigationView = binding.bottomNavigationView
         myViewPageAdapter = MyViewPageAdapter(this)
         viewPager.adapter = myViewPageAdapter
+        bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener {item ->
             when (item.itemId) {
                 R.id.home -> viewPager.currentItem = 0
@@ -43,8 +43,9 @@ class MainFragment : Fragment() {
                     0 -> R.id.home
                     1 -> R.id.history
                     2 -> R.id.notifications
-                    3 -> R.id.settings
+                    3 -> R.id.settings;
                     else -> R.id.home
+
                 }
             }
         })

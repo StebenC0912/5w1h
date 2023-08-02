@@ -6,14 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MainFragment"
     android:orientation="vertical">
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/viewPager2"
-        android:layout_weight="1"
-        android:layout_above="@id/bottomNavigationView"
-        />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
@@ -22,6 +14,14 @@
         app:itemIconTint="#0b1f15"
         app:itemTextColor="#191c1a"
         app:menu="@menu/bottom_navigation_bar"
-        tools:ignore="VisualLintBottomNav" />
+        android:layout_above="@id/viewPager2"
+        />
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewPager2"
+        android:layout_weight="1"
+        />
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
