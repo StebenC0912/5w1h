@@ -36,7 +36,7 @@ class MainFragment : Fragment() {
             true
         }
         viewPager.registerOnPageChangeCallback(object :
-            androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback() {
+            ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 // Update the selected tab in the BottomNavigationView when swiping ViewPager
@@ -44,7 +44,7 @@ class MainFragment : Fragment() {
                     0 -> R.id.home
                     1 -> R.id.history
                     2 -> R.id.notifications
-                    3 -> R.id.settings;
+                    3 -> R.id.settings
                     else -> R.id.home
 
                 }
