@@ -20,11 +20,12 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentMainBinding.inflate(inflater, container, false)
-        viewPager = binding.viewPager2
-        bottomNavigationView = binding.bottomNavigationView
+        val binding = FragmentMainBinding.inflate(inflater)
         myViewPageAdapter = MyViewPageAdapter(this)
+        viewPager = binding.viewPager2
+
         viewPager.adapter = myViewPageAdapter
+        bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener {item ->
             when (item.itemId) {
                 R.id.home -> viewPager.currentItem = 0
@@ -35,7 +36,7 @@ class MainFragment : Fragment() {
             true
         }
         viewPager.registerOnPageChangeCallback(object :
-            androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback() {
+            ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 // Update the selected tab in the BottomNavigationView when swiping ViewPager
@@ -45,6 +46,7 @@ class MainFragment : Fragment() {
                     2 -> R.id.notifications
                     3 -> R.id.settings
                     else -> R.id.home
+
                 }
             }
         })
