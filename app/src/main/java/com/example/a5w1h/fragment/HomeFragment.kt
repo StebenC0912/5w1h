@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a5w1h.R
 import com.example.a5w1h.adapter.WordAdapter
+import com.example.a5w1h.databinding.FragmentHomeBinding
 import com.example.a5w1h.model.Word
 import org.json.JSONArray
 import java.io.InputStream
@@ -18,25 +19,22 @@ import java.io.InputStream
 
 class HomeFragment : Fragment() {
     private var wordList = ArrayList<Word>()
-
+    private lateinit var binding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(
-            R.layout.fragment_home, container,
-            false
-        )
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+
         val text: String = readFileDirectlyAsText("vocabulary_en_vi.txt")
         val loadList: ArrayList<Word> = convertJsonToWordList(text)
-        val autoAddBtn: Button = view.findViewById(R.id.autoAdd)
-        val deleteAll : TextView = view.findViewById(R.id.deleteAll)
+        val autoAddBtn: Button = binding.autoAdd
+        val deleteAll : TextView = binding.deleteAll
         deleteAll.setOnClickListener {
             wordList.clear()
-            val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            recyclerView.adapter = WordAdapter(wordList, requireContext())
+            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            binding.recyclerView.adapter = WordAdapter(wordList, requireContext())
         }
         autoAddBtn.setOnClickListener(
             View.OnClickListener {
@@ -47,12 +45,11 @@ class HomeFragment : Fragment() {
                     val randomIndex = (0 until loadList.size).random()
                     wordList.add(loadList[randomIndex])
                 }
-                val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-                recyclerView.layoutManager = LinearLayoutManager(requireContext())
-                recyclerView.adapter = WordAdapter(wordList, requireContext())
+                binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                binding.recyclerView.adapter = WordAdapter(wordList, requireContext())
             }
         )
-        return view
+        return binding.root
     }
 
     fun convertJsonToWordList(jsonString: String): ArrayList<Word> {
