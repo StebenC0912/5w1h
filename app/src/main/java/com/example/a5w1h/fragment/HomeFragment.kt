@@ -19,6 +19,7 @@ import java.io.InputStream
 
 class HomeFragment : Fragment() {
     private var wordList = ArrayList<Word>()
+    private var loadList = ArrayList<Word>()
     private lateinit var binding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +29,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val text: String = readFileDirectlyAsText("vocabulary_en_vi.txt")
-        val loadList: ArrayList<Word> = convertJsonToWordList(text)
+        loadList = convertJsonToWordList(text)
         val autoAddBtn: Button = binding.autoAdd
         val deleteAll : TextView = binding.deleteAll
         deleteAll.setOnClickListener {
