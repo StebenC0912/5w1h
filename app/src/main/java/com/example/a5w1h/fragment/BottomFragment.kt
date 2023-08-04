@@ -109,10 +109,12 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
     override fun getSelectedWord(sortedWord: Word) {
+        if (selectedWordList.contains(sortedWord)) return;
         selectedWord += ", "
         selectedWord += sortedWord.origin
         binding.selectedWord.text = selectedWord
         selectedWordList.add(sortedWord)
+        binding.totalWord.text = "${selectedWordList.size} /5"
     }
 
 
