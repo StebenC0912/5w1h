@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.a5w1h.R
 import com.example.a5w1h.adapter.WordAdapter
 import com.example.a5w1h.databinding.FragmentHomeBinding
@@ -28,10 +27,11 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        val text: String = readFileDirectlyAsText("vocabulary_en_vi.txt")
+        val text: String = readFileDirectlyAsText()
         loadList = convertJsonToWordList(text)
         val autoAddBtn: Button = binding.autoAdd
-        val deleteAll : TextView = binding.deleteAll
+        val deleteAll: TextView = binding.deleteAll
+        val manualAddBtn: Button = binding.manualAdd
         deleteAll.setOnClickListener {
             wordList.clear()
             binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -50,6 +50,10 @@ class HomeFragment : Fragment() {
                 binding.recyclerView.adapter = WordAdapter(wordList, requireContext())
             }
         )
+        manualAddBtn.setOnClickListener(
+            View.OnClickListener {
+                BottomFragment().show(requireActivity().supportFragmentManager, "TAG")
+            })
         return binding.root
     }
 
@@ -66,10 +70,12 @@ class HomeFragment : Fragment() {
         }
         return wordList
     }
-    fun readFileDirectlyAsText(fileName: String): String {
+
+    fun readFileDirectlyAsText(): String {
         val inputStream: InputStream = resources.openRawResource(R.raw.vocabulary_en_vi)
         val inputString = inputStream.bufferedReader().use { it.readText() }
         inputStream.close()
         return inputString
     }
+
 }

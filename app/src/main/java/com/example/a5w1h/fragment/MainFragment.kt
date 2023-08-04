@@ -23,7 +23,7 @@ class MainFragment : Fragment() {
         val binding = FragmentMainBinding.inflate(inflater)
         myViewPageAdapter = MyViewPageAdapter(this)
         viewPager = binding.viewPager2
-
+        viewPager.isUserInputEnabled = false
         viewPager.adapter = myViewPageAdapter
         bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener {item ->
