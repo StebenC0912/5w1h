@@ -48,8 +48,6 @@ class BottomFragment(private val listener: SelectedWordList) : BottomSheetDialog
         binding.save.setOnClickListener {
             if (selectedWordList.size < 5) {
                 Toast.makeText(context, "Not enough word", Toast.LENGTH_SHORT).show()
-            } else if (selectedWordList.size > 5) {
-                Toast.makeText(context, "Too many word", Toast.LENGTH_SHORT).show()
             } else {
                 listener.getSelectedWordList(selectedWordList)
                 dismiss()
@@ -109,9 +107,11 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
     override fun getSelectedWord(sortedWord: Word) {
-        if (selectedWordList.contains(sortedWord) || selectedWordList.size > 5) return;
+        if (selectedWordList.contains(sortedWord) || selectedWordList.size >= 5) return;
         selectedWord += sortedWord.origin
-        selectedWord += ", "
+        if (selectedWordList.size < 3) selectedWord += ", "
+        else if (selectedWordList.size == 3) selectedWord += " and "
+        else if (selectedWordList.size == 4) selectedWord = selectedWord.substring(0, selectedWord.length - 2)
         binding.selectedWord.text = selectedWord
         selectedWordList.add(sortedWord)
         binding.totalWord.text = "${selectedWordList.size} /5"
