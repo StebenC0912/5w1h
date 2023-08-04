@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a5w1h.R
+import com.example.a5w1h.SelectedLetter
 
-class LetterAdapter(private val context : Context) : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
+class LetterAdapter(private val context : Context, private val listener: SelectedLetter) : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
 
     private val letterList = listOf<Char>('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
                                             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
@@ -29,6 +30,9 @@ class LetterAdapter(private val context : Context) : RecyclerView.Adapter<Letter
     override fun onBindViewHolder(holder: LetterViewHolder, position: Int) {
         val currentItem = letterList[position]
         holder.letterView.text = currentItem.toString()
+        holder.letterView.setOnClickListener {
+            listener?.getSortedLetter(currentItem.toString())
+        }
     }
 
 

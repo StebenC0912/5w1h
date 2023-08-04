@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a5w1h.R
+import com.example.a5w1h.SelectedWordList
 import com.example.a5w1h.adapter.WordAdapter
 import com.example.a5w1h.databinding.FragmentHomeBinding
 import com.example.a5w1h.model.Word
@@ -16,7 +17,7 @@ import org.json.JSONArray
 import java.io.InputStream
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), SelectedWordList {
     private var wordList = ArrayList<Word>()
     private var loadList = ArrayList<Word>()
     private lateinit var binding: FragmentHomeBinding
@@ -52,7 +53,7 @@ class HomeFragment : Fragment() {
         )
         manualAddBtn.setOnClickListener(
             View.OnClickListener {
-                BottomFragment().show(requireActivity().supportFragmentManager, "TAG")
+                BottomFragment(this).show(requireActivity().supportFragmentManager, "TAG")
             })
         return binding.root
     }
@@ -76,6 +77,12 @@ class HomeFragment : Fragment() {
         val inputString = inputStream.bufferedReader().use { it.readText() }
         inputStream.close()
         return inputString
+    }
+
+    override fun getSelectedWordList(sortedWordList: ArrayList<Word>) {
+        wordList = sortedWordList
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = WordAdapter(wordList, requireContext())
     }
 
 }

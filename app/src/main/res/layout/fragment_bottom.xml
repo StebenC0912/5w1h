@@ -2,12 +2,11 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="2"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="10dp"
+    android:id="@+id/fragment_bottom"
     tools:context=".fragment.BottomFragment">
-    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search"
@@ -19,9 +18,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allWordList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="400dp"
         tools:listitem="@layout/word_sort"
+        android:scrollbars="vertical"
+        android:layout_marginTop="10dp"
+        android:overScrollMode="ifContentScrolls"
         />
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -43,7 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="word"
             android:layout_gravity="center"
             />
 
