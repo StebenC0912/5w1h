@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
 import com.example.a5w1h.R
 import com.example.a5w1h.adapter.MyViewPageAdapter
@@ -29,28 +31,22 @@ class MainFragment : Fragment() {
         bottomNavigationView.setOnNavigationItemSelectedListener {item ->
             when (item.itemId) {
                 R.id.home -> viewPager.currentItem = 0
-                R.id.history -> viewPager.currentItem = 1
+                R.id.history -> reloadHistoryFragment()
                 R.id.notifications -> viewPager.currentItem = 2
                 R.id.settings -> viewPager.currentItem = 3
             }
             true
         }
-        viewPager.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                // Update the selected tab in the BottomNavigationView when swiping ViewPager
-                bottomNavigationView.selectedItemId = when (position) {
-                    0 -> R.id.home
-                    1 -> R.id.history
-                    2 -> R.id.notifications
-                    3 -> R.id.settings
-                    else -> R.id.home
-
-                }
-            }
-        })
         return binding.root
     }
+    private fun reloadHistoryFragment() {
+        // Initialize the HistoryFragment
+        val newHistoryFragment = HistoryFragment() // Replace with your actual HistoryFragment instantiation logic
 
+        // Replace the old HistoryFragment in the adapter
+        myViewPageAdapter.replaceFragment(1, newHistoryFragment)
+
+        // Update the current item in the ViewPager2
+        viewPager.currentItem = 1
+    }
 }

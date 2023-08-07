@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a5w1h.R
-import com.example.a5w1h.SelectedLetter
+import com.example.a5w1h.ConnectBottomInterface
 
-class LetterAdapter(private val context : Context, private val listener: SelectedLetter) : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
+class LetterAdapter(private val context : Context, private val listener: ConnectBottomInterface) : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
 
     private val letterList = listOf<Char>('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
                                             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',

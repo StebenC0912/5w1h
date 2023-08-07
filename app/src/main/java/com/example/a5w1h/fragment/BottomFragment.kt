@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a5w1h.R
-import com.example.a5w1h.SelectedLetter
-import com.example.a5w1h.SelectedWord
-import com.example.a5w1h.SelectedWordList
+import com.example.a5w1h.ConnectBottomInterface
+import com.example.a5w1h.SelectedWordListInterface
 import com.example.a5w1h.adapter.LetterAdapter
 import com.example.a5w1h.adapter.WordListSortedAdapter
 import com.example.a5w1h.databinding.FragmentBottomBinding
@@ -20,7 +19,7 @@ import org.json.JSONArray
 import java.io.InputStream
 
 
-class BottomFragment(private val listener: SelectedWordList) : BottomSheetDialogFragment(), SelectedLetter, SelectedWord {
+class BottomFragment(private val listener: SelectedWordListInterface) : BottomSheetDialogFragment(), ConnectBottomInterface {
 
     private lateinit var binding: FragmentBottomBinding
     private var wordList = ArrayList<Word>()

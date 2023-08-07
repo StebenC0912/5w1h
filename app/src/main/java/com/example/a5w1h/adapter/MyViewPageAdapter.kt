@@ -10,16 +10,23 @@ import com.example.a5w1h.fragment.SettingFragment
 
 class MyViewPageAdapter(fragmentFragment: MainFragment) :
     FragmentStateAdapter(fragmentFragment) {
-    override fun getItemCount(): Int {
-        return 4;
+    private val fragmentList = mutableListOf<Fragment>()
+
+    init {
+        // Initialize the fragmentList with default fragments
+        fragmentList.addAll(listOf(HomeFragment(), HistoryFragment(), NotificationFragment(), SettingFragment()))
     }
+
+    override fun getItemCount(): Int {
+        return fragmentList.size
+    }
+
     override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            0 -> HomeFragment()
-            1 -> HistoryFragment()
-            2 -> NotificationFragment()
-            3 -> SettingFragment()
-            else -> HomeFragment()
-        }
+        return fragmentList[position]
+    }
+
+    fun replaceFragment(position: Int, newFragment: Fragment) {
+        fragmentList[position] = newFragment
+        notifyDataSetChanged()
     }
 }

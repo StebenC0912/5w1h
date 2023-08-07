@@ -103,5 +103,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/word"
+        android:layout_weight="1"
+        />
+    <Button
+        android:id="@+id/startLearn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bắt đầu học"
+        android:layout_gravity="center"
         />
 </androidx.appcompat.widget.LinearLayoutCompat>

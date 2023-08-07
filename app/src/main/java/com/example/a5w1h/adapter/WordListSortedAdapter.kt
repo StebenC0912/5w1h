@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a5w1h.R
-import com.example.a5w1h.SelectedLetter
-import com.example.a5w1h.SelectedWord
+import com.example.a5w1h.ConnectBottomInterface
 import com.example.a5w1h.model.Word
 
-class WordListSortedAdapter(private val wordList: ArrayList<Word>, private val context: Context, private val listener: SelectedWord) :
+class WordListSortedAdapter(private val wordList: ArrayList<Word>, private val context: Context, private val listener: ConnectBottomInterface) :
     RecyclerView.Adapter<WordListSortedAdapter.WordListSortedViewHolder>() {
     class WordListSortedViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         val wordView : TextView = itemView.findViewById(R.id.word)
