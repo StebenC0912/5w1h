@@ -12,6 +12,8 @@ import com.example.a5w1h.R
 import com.example.a5w1h.adapter.HistoryAdapter
 import com.example.a5w1h.data.DataHelper
 import com.example.a5w1h.databinding.FragmentHistoryBinding
+import com.example.a5w1h.fragment.LoadFromFile.convertJsonToWordList
+import com.example.a5w1h.fragment.LoadFromFile.readFileDirectlyAsText
 import com.example.a5w1h.model.Word
 import org.json.JSONArray
 import java.io.InputStream
@@ -32,33 +34,13 @@ class HistoryFragment : Fragment() {
         val recyclerView : RecyclerView = binding.rvHistory
         dataHelper = DataHelper(requireContext())
         db = dataHelper.readableDatabase
-        data = convertJsonToWordList(readFileDirectlyAsText())
+        data = convertJsonToWordList(readFileDirectlyAsText(resources))
         idList = dataHelper.getAllData(db)
         recyclerView.adapter = HistoryAdapter(idList, data, requireContext())
         Toast.makeText(context, "OKOKOK", Toast.LENGTH_SHORT).show()
         return binding.root
     }
 
-    fun convertJsonToWordList(jsonString: String): ArrayList<Word> {
-        val wordList = ArrayList<Word>()
-        val jsonArray = JSONArray(jsonString)
-        for (i in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            val id = jsonObject.getInt("id")
-            val english = jsonObject.getString("english")
-            val vietnamese = jsonObject.getString("vietnamese")
-            val word = Word(id, english, vietnamese)
-            wordList.add(word)
-        }
-        return wordList
-    }
-
-    fun readFileDirectlyAsText(): String {
-        val inputStream: InputStream = resources.openRawResource(R.raw.vocabulary_en_vi)
-        val inputString = inputStream.bufferedReader().use { it.readText() }
-        inputStream.close()
-        return inputString
-    }
 
 
 
