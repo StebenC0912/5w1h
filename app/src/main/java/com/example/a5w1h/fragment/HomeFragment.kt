@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.a5w1h.R
 import com.example.a5w1h.SelectedWordListInterface
 import com.example.a5w1h.adapter.WordAdapter
 import com.example.a5w1h.data.DataHelper
@@ -20,10 +19,6 @@ import com.example.a5w1h.databinding.FragmentHomeBinding
 import com.example.a5w1h.fragment.LoadFromFile.convertJsonToWordList
 import com.example.a5w1h.fragment.LoadFromFile.readFileDirectlyAsText
 import com.example.a5w1h.model.Word
-import org.json.JSONArray
-import java.io.InputStream
-import java.lang.StringBuilder
-import java.time.LocalDate
 
 
 class HomeFragment : Fragment(), SelectedWordListInterface {
@@ -75,7 +70,6 @@ class HomeFragment : Fragment(), SelectedWordListInterface {
                     for (i in 0 until wordList.size) {
                         stringBuilder.append(wordList[i].id)
                         stringBuilder.append(",")
-                        wordList[i].date = LocalDate.now().toString()
                     }
                     dataHelper.insertData(stringBuilder.toString(), db)
                     dataHelper.close()
@@ -90,5 +84,4 @@ class HomeFragment : Fragment(), SelectedWordListInterface {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = WordAdapter(wordList, requireContext())
     }
-
 }

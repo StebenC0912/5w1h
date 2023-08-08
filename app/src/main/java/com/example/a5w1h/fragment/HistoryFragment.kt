@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a5w1h.R
 import com.example.a5w1h.adapter.HistoryAdapter
@@ -32,17 +34,24 @@ class HistoryFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
         val recyclerView : RecyclerView = binding.rvHistory
+        val refreshBtn : ImageButton = binding.refresh
+        val deleteAll : ImageButton = binding.deleteAll
         dataHelper = DataHelper(requireContext())
         db = dataHelper.readableDatabase
         data = convertJsonToWordList(readFileDirectlyAsText(resources))
         idList = dataHelper.getAllData(db)
+        print(idList.size)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = HistoryAdapter(idList, data, requireContext())
-        Toast.makeText(context, "OKOKOK", Toast.LENGTH_SHORT).show()
+        refreshBtn.setOnClickListener(View.OnClickListener {
+            idList = dataHelper.getAllData(db)
+            recyclerView.adapter = HistoryAdapter(idList, data, requireContext())
+        })
+        deleteAll.setOnClickListener(View.OnClickListener {
+            dataHelper.deleteAllData(db)
+            idList = dataHelper.getAllData(db)
+            recyclerView.adapter = HistoryAdapter(idList, data, requireContext())
+        })
         return binding.root
     }
-
-
-
-
-
 }

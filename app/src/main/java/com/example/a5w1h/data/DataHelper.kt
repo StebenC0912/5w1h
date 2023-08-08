@@ -47,10 +47,17 @@ class DataHelper(context: Context) :
         val cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
         while (cursor.moveToNext()) {
             val wordID = cursor.getString(cursor.getColumnIndexOrThrow(WORD_ID_COL))
-            list.add(wordID)
+            val date = cursor.getString(cursor.getColumnIndexOrThrow(DATE_COL))
+            val result = "$wordID+$date"
+            list.add(result)
         }
         cursor.close()
-        db.close()
         return list
+    }
+    fun deleteAllData(db : SQLiteDatabase) {
+        db.execSQL("DELETE FROM $TABLE_NAME")
+    }
+    fun deleteData(db : SQLiteDatabase, id : String) {
+        db.execSQL("DELETE FROM $TABLE_NAME WHERE $ID_COL = $id")
     }
 }
