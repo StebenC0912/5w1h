@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a5w1h.R
 import com.example.a5w1h.data.DataHelper
@@ -35,8 +36,7 @@ class HistoryAdapter(
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        val index : Int = wordList.size - position - 1
-        val currentItem = wordList[index]
+        val currentItem = wordList[position]
         var intBuilder: StringBuilder = StringBuilder()
         var stringBuilder = StringBuilder()
         var date : String = currentItem.substring(currentItem.indexOf('+') + 1, currentItem.length)
@@ -57,14 +57,12 @@ class HistoryAdapter(
         holder.deleteBtn.setOnClickListener {
             dataHelper = DataHelper(context)
             db = dataHelper.writableDatabase
-            wordList.removeAt(index)
-            val newPosition = wordList.size - index - 1
-
             // Delete data from the database using the new position
-            dataHelper.deleteData(db, newPosition.toString())
-
+            dataHelper.deleteData(db, position.toString())
             // Notify the adapter about the item removal
-            notifyItemRemoved(newPosition)
+            wordList.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, wordList.size)
         }
     }
 }

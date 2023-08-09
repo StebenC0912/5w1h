@@ -2,6 +2,7 @@ package com.example.a5w1h.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -20,7 +21,8 @@ import org.json.JSONArray
 import java.io.InputStream
 
 
-class BottomFragment(private val listener: SelectedWordListInterface) : BottomSheetDialogFragment(), ConnectBottomInterface {
+class BottomFragment(private val listener: SelectedWordListInterface) : BottomSheetDialogFragment(),
+    ConnectBottomInterface {
 
     private lateinit var binding: FragmentBottomBinding
     private var wordList = ArrayList<Word>()
@@ -53,10 +55,19 @@ class BottomFragment(private val listener: SelectedWordListInterface) : BottomSh
                 dismiss()
             }
         }
-    return binding.root
-}
+        binding.controlBar.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    dismiss()
+                    true
+                }
+                else -> false
+            }
+        }
+        return binding.root
+    }
 
-override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Set peek height to control the initial visible height
@@ -72,7 +83,6 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
                 }
             }
     }
-
 
 
     override fun getSortedLetter(sortedLetter: String) {
@@ -92,7 +102,8 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         selectedWord += sortedWord.origin
         if (selectedWordList.size < 3) selectedWord += ", "
         else if (selectedWordList.size == 3) selectedWord += " and "
-        else if (selectedWordList.size == 4) selectedWord = selectedWord.substring(0, selectedWord.length - 2)
+        else if (selectedWordList.size == 4) selectedWord =
+            selectedWord.substring(0, selectedWord.length - 2)
         binding.selectedWord.text = selectedWord
         selectedWordList.add(sortedWord)
         binding.totalWord.text = "${selectedWordList.size} /5"

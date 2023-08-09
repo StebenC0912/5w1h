@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.content.Context
 import android.os.Build
+import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.a5w1h.model.Word
 import java.time.LocalDate
@@ -58,6 +60,7 @@ class DataHelper(context: Context) :
         db.execSQL("DELETE FROM $TABLE_NAME")
     }
     fun deleteData(db : SQLiteDatabase, id : String) {
-        db.execSQL("DELETE FROM $TABLE_NAME WHERE $ID_COL = $id")
+        val rowsDeleted = db.delete(TABLE_NAME, "$ID_COL = ?", arrayOf(id))
+        Log.d("DataHelper", "Rows deleted: $rowsDeleted")
     }
 }
