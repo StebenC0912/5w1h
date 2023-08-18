@@ -1,10 +1,11 @@
 package com.example.a5w1h.fragment
 
+import android.content.res.Resources
 import com.example.a5w1h.R
 import com.example.a5w1h.model.Word
 import org.json.JSONArray
 import java.io.InputStream
-import android.content.res.Resources
+
 object LoadFromFile {
     fun convertJsonToWordList(jsonString: String): ArrayList<Word> {
         val wordList = ArrayList<Word>()

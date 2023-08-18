@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.a5w1h.R
 import com.example.a5w1h.ConnectBottomInterface
+import com.example.a5w1h.R
 import com.example.a5w1h.SelectedWordListInterface
 import com.example.a5w1h.adapter.LetterAdapter
 import com.example.a5w1h.adapter.WordListSortedAdapter
@@ -17,8 +17,6 @@ import com.example.a5w1h.fragment.LoadFromFile.readFileDirectlyAsText
 import com.example.a5w1h.model.Word
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import org.json.JSONArray
-import java.io.InputStream
 
 
 class BottomFragment(private val listener: SelectedWordListInterface) : BottomSheetDialogFragment(),
@@ -30,9 +28,8 @@ class BottomFragment(private val listener: SelectedWordListInterface) : BottomSh
     private var selectedWord = ""
     private var selectedWordList = ArrayList<Word>()
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         binding = FragmentBottomBinding.inflate(inflater)
         binding.search.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -40,7 +37,7 @@ class BottomFragment(private val listener: SelectedWordListInterface) : BottomSh
 
         binding.allWordList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.allWordList.isNestedScrollingEnabled = true;
+        binding.allWordList.isNestedScrollingEnabled = true
         wordList = LoadFromFile.convertJsonToWordList(readFileDirectlyAsText(resources))
         loadList = wordList.toList() as ArrayList<Word>
         binding.allWordList.adapter = WordListSortedAdapter(loadList, requireContext(), this)
@@ -61,6 +58,7 @@ class BottomFragment(private val listener: SelectedWordListInterface) : BottomSh
                     dismiss()
                     true
                 }
+
                 else -> false
             }
         }
@@ -98,7 +96,7 @@ class BottomFragment(private val listener: SelectedWordListInterface) : BottomSh
     }
 
     override fun getSelectedWord(sortedWord: Word) {
-        if (selectedWordList.contains(sortedWord) || selectedWordList.size >= 5) return;
+        if (selectedWordList.contains(sortedWord) || selectedWordList.size >= 5) return
         selectedWord += sortedWord.origin
         if (selectedWordList.size < 3) selectedWord += ", "
         else if (selectedWordList.size == 3) selectedWord += " and "

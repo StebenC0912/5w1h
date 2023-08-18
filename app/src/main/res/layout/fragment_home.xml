@@ -3,19 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.HomeFragment"
     android:orientation="vertical"
     android:padding="15dp"
+    tools:context=".fragment.HomeFragment">
 
-    >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="5 WORDS/ 1 HOUR"
         android:gravity="center"
-        android:textStyle="bold"
-        />
+        android:text="5 WORDS/ 1 HOUR"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
@@ -24,41 +22,43 @@
         android:text="Học từ vựng tiếng Anh mỗi ngày"
         android:textSize="15dp"
         tools:ignore="TextSizeCheck" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:orientation="vertical"
         android:background="@drawable/instructor_shape"
-        >
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:paddingTop="10dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textStyle="bold"
             android:text="@string/instruct"
-            />
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textColor="@color/black"
             android:text="@string/instruction"
             android:textAlignment="textStart"
-            />
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <Button
                 android:id="@+id/manualAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Thêm thủ công"
                 android:layout_marginRight="10dp"
-                />
+                android:layout_weight="1"
+                android:text="Thêm thủ công" />
+
             <Button
                 android:id="@+id/autoAdd"
                 android:layout_width="wrap_content"
@@ -69,31 +69,33 @@
                 />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
+            android:text="Từ vựng hôm nay"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:text="Từ vựng hôm nay"
-            android:layout_marginTop="10dp"
 
             />
+
         <TextView
             android:id="@+id/deleteAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Xóa tất cả"
             android:textAlignment="textEnd"
+            android:textColor="#7a9082"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:layout_margin="10dp"
-            android:textColor="#7a9082"
 
             />
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -102,14 +104,13 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/word"
         android:layout_weight="1"
-        />
+        tools:listitem="@layout/word" />
+
     <Button
         android:id="@+id/startLearn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bắt đầu học"
         android:layout_gravity="center"
-        />
+        android:text="Bắt đầu học" />
 </androidx.appcompat.widget.LinearLayoutCompat>

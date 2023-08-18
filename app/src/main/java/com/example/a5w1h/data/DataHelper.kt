@@ -1,14 +1,12 @@
 package com.example.a5w1h.data
 
 import android.content.ContentValues
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.content.Context
 import android.os.Build
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.example.a5w1h.model.Word
 import java.time.LocalDate
 
 
@@ -44,7 +42,8 @@ class DataHelper(context: Context) :
         values.put(DATE_COL, LocalDate.now().toString())
         db.insert(TABLE_NAME, null, values)
     }
-    fun getAllData(db : SQLiteDatabase) : ArrayList<String> {
+
+    fun getAllData(db: SQLiteDatabase): ArrayList<String> {
         val list = ArrayList<String>()
         val cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
         while (cursor.moveToNext()) {
@@ -56,10 +55,12 @@ class DataHelper(context: Context) :
         cursor.close()
         return list
     }
-    fun deleteAllData(db : SQLiteDatabase) {
+
+    fun deleteAllData(db: SQLiteDatabase) {
         db.execSQL("DELETE FROM $TABLE_NAME")
     }
-    fun deleteData(db : SQLiteDatabase, id : String) {
+
+    fun deleteData(db: SQLiteDatabase, id: String) {
         val rowsDeleted = db.delete(TABLE_NAME, "$ID_COL = ?", arrayOf(id))
         Log.d("DataHelper", "Rows deleted: $rowsDeleted")
     }

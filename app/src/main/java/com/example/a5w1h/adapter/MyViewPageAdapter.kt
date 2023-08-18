@@ -8,13 +8,19 @@ import com.example.a5w1h.fragment.MainFragment
 import com.example.a5w1h.fragment.NotificationFragment
 import com.example.a5w1h.fragment.SettingFragment
 
-class MyViewPageAdapter(fragmentFragment: MainFragment) :
-    FragmentStateAdapter(fragmentFragment) {
+class MyViewPageAdapter(fragmentFragment: MainFragment) : FragmentStateAdapter(fragmentFragment) {
     private val fragmentList = mutableListOf<Fragment>()
 
     init {
         // Initialize the fragmentList with default fragments
-        fragmentList.addAll(listOf(HomeFragment(), HistoryFragment(), NotificationFragment(), SettingFragment()))
+        fragmentList.addAll(
+            listOf(
+                HomeFragment(),
+                HistoryFragment(),
+                NotificationFragment(),
+                SettingFragment()
+            )
+        )
     }
 
     override fun getItemCount(): Int {

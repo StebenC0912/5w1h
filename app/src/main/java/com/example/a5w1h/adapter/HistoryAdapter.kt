@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a5w1h.R
 import com.example.a5w1h.data.DataHelper
@@ -18,8 +17,9 @@ class HistoryAdapter(
     private val data: ArrayList<Word>,
     private val context: Context
 ) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
-    private lateinit var dataHelper : DataHelper
-    private lateinit var db : SQLiteDatabase
+    private lateinit var dataHelper: DataHelper
+    private lateinit var db: SQLiteDatabase
+
     class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val wordList: TextView = itemView.findViewById(R.id.wordList)
         val date: TextView = itemView.findViewById(R.id.date)
@@ -39,8 +39,8 @@ class HistoryAdapter(
         val currentItem = wordList[position]
         var intBuilder: StringBuilder = StringBuilder()
         var stringBuilder = StringBuilder()
-        var date : String = currentItem.substring(currentItem.indexOf('+') + 1, currentItem.length)
-        for (i in 0 .. currentItem.length - 1) {
+        var date: String = currentItem.substring(currentItem.indexOf('+') + 1, currentItem.length)
+        for (i in 0..currentItem.length - 1) {
             if (currentItem[i] == ',') {
                 val id = intBuilder.toString().toInt()
                 intBuilder.clear()

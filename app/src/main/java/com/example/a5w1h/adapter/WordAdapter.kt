@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a5w1h.R
 import com.example.a5w1h.model.Word
 
-class WordAdapter(private val wordList : ArrayList<Word>, private val context: Context) : RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
+class WordAdapter(private val wordList: ArrayList<Word>, private val context: Context) :
+    RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
     inner class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val letterView : TextView = itemView.findViewById(R.id.letter)
-        val wordView : TextView = itemView.findViewById(R.id.word)
-        val meaningView : TextView = itemView.findViewById(R.id.meaning)
-        val deleteBtn : ImageButton = itemView.findViewById(R.id.deleteBtn)
+        val letterView: TextView = itemView.findViewById(R.id.letter)
+        val wordView: TextView = itemView.findViewById(R.id.word)
+        val meaningView: TextView = itemView.findViewById(R.id.meaning)
+        val deleteBtn: ImageButton = itemView.findViewById(R.id.deleteBtn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
